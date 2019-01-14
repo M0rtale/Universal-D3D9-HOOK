@@ -381,6 +381,8 @@ DWORD WINAPI initialize(void* mod)
 	UnhookFunction(reinterpret_cast<PVOID*>(&o_Reset), Reset_h);
 	UnhookFunction(reinterpret_cast<PVOID*>(&o_Present), Present_h);
 	UnhookFunction(reinterpret_cast<PVOID*>(&o_BeginScene), BeginScene_h);
+	if(o_WndProc)
+		SetWindowLongPtr(gameWindow, GWL_WNDPROC, o_WndProc);
 
 	patch(guard_function, original_fn);
 
